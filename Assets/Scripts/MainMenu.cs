@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
     public void OnPlayButtonPressed()
     {
         Debug.Log("PlayButton Pressed..!!");
-        StartCoroutine(Wait());                                                         //This function will go to the Line 26 and run that code
+        StartCoroutine(Wait());                                                         //This function will go to the Line 32 and run that code
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);           //This function will add the BuildIndex as per the Build Settings(For our example it will go to Level1
     }
 
