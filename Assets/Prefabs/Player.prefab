@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3716671707794325440}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,13 +158,15 @@ MonoBehaviour:
   SavePosition: {x: 0, y: 0, z: 0}
   LoadPosition: {x: 0, y: 0, z: 0}
   HorizontalForce: 10
-  VerticalForce: 37
+  VerticalForce: 40
   isGrounded: 0
   GroundOrigin: {fileID: 5347837544420243322}
   GroundRadius: 0.4
   GroundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  AirControlFactor: 0.5
+  State: 0
 --- !u!1 &5347837544420243321
 GameObject:
   m_ObjectHideFlags: 0
