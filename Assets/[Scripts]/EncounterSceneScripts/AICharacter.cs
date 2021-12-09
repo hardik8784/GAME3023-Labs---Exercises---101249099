@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCharacter : ICharacter
+public class AICharacter : ICharacter
 {
-    [SerializeField]
-    private EncounterInstance myEncounter;
-    public void CastAbility(int Slot)
-    {
-        CastAbility(Slot, this, myEncounter.Enemy);
-    }
     public override void TakeTurn(EncounterInstance Encounter)
     {
-        myEncounter = Encounter;
-        //throw new System.NotImplementedException();
+        Debug.Log("AI Turn!");
+        // Encounter.AdvanceTurns();
+        CastAbility(Random.Range(0, Abilities.Length), this, Encounter.Player);
+        //CastAbility(0, this, Encounter.Player);
     }
 
     // Start is called before the first frame update

@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,41 +7,58 @@ using UnityEngine;
 public class EncounterUI : MonoBehaviour
 {
     [SerializeField]
+    private EncounterInstance Encounter;
+
+    [SerializeField]
     private GameObject AbilitiesPanel;
 
     [SerializeField]
-    private TMPro.TextMeshProUGUI EncounterText;
+    private TMPro.TextMeshProUGUI EncounterTextBox;
 
-    private IEnumerator AnimateText = null;
 
     [SerializeField]
-    private float AnimationSeconds = 0.1f;
+    private float TextSecondsPerCharacter = 0.2f;
+
+    private IEnumerator AnimateTextCoroutine_ = null;
 
     // Start is called before the first frame update
     void Start()
     {
-        IEnumerator AnimateText = AnimateTextCoroutine("You have encountered a:" + " Enemy", AnimationSeconds);
-        StartCoroutine(AnimateText);
-        //StopCoroutine(AnimateText);
+        AnimateTextCoroutine_ = AnimateTextCoroutine("You Have Encountered a: " + "Enemy", TextSecondsPerCharacter);
+        StartCoroutine(AnimateTextCoroutine_);
+        //StopCoroutine(AnimateTextCoroutine_);
+        Encounter.OnTurnBegin.AddListener(AnnounceTurnBegin);
     }
 
-    IEnumerator AnimateTextCoroutine(string message,float AnimationSeconds=0.1f)
+    void AnnounceTurnBegin(ICharacter WhosTurn)
     {
-        AbilitiesPanel.SetActive(false);
-        EncounterText.text = " ";
-        for (int character =0; character< message.Length;character++)
+        if (AnimateTextCoroutine_ != null)
         {
-            EncounterText.text += message[character];
-            yield return new WaitForSeconds(AnimationSeconds);
+            StopCoroutine(AnimateTextCoroutine_);
         }
-        AbilitiesPanel.SetActive(true);
-        AnimateText = null;
-    }
 
+        AnimateTextCoroutine_ = AnimateTextCoroutine("It is : " + WhosTurn.name + "'s Turn", TextSecondsPerCharacter);
+        StartCoroutine(AnimateTextCoroutine_);
+    }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    IEnumerator AnimateTextCoroutine(string message, float SecondsPerCharacter = 0.1f)
+    {
+        AbilitiesPanel.SetActive(false);
+        EncounterTextBox.text = "";
+
+        for (int Character = 0; Character < message.Length; Character++)
+        {
+            EncounterTextBox.text += message[Character];
+            yield return new WaitForSeconds(SecondsPerCharacter);
+        }
+
+        AbilitiesPanel.SetActive(true);
+        AnimateTextCoroutine_ = null;
     }
 }

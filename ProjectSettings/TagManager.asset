@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Door
   - Platform
+  - House
   layers:
   - Default
   - TransparentFX

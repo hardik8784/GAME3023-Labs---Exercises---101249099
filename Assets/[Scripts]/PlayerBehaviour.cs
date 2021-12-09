@@ -165,6 +165,12 @@ public class PlayerBehaviour : MonoBehaviour
             Debug.Log("Collision with Door");
             SceneManager.LoadScene("Level2");
         }
+
+        else if (collision.gameObject.tag == "House")
+        {
+            Debug.Log("Entered into the House");
+            SceneManager.LoadScene("EncounterScene");
+        }
     }
 
     public void OnButtonPressedSave()                                       //OnButtonPressedSave Event
